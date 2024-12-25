@@ -1,15 +1,28 @@
 "use client";
 
+import { useState } from "react";
+
 //Client component for CSR (Client Site Rendering)
 export default function LoginForm() {
+    const[email, setEmail] = useState ("");
+    const[password, setPassword] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault ();
+        console.log("Form Data:",{email:email, password:password});
+    };
   return (
+    
     <div className="w-[380px] mx-auto">
       <div className="bg-white shadow-md border border-gray-200 rounded-lg p-4">
-        <form action="#" className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
+
+
           {/* Title Section */}
           <h3 className="text-center text-xl font-semibold text-gray-900 mb-3">
             Sign in to your Account
           </h3>
+
 
           {/* Email Section */}
           <div>
@@ -23,11 +36,13 @@ export default function LoginForm() {
               type="email"
               name="email"
               id="email"
-              value={"nismal.saumya1@gmail.com"}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-gray-50 border border-gray-300 rounded-sm text-gray-900  focus:ring-blue-500  focus:border-blue-500 block w-full p-1"
               placeholder="Enter your email"
             />
           </div>
+
 
           {/* Password Section */}
           <div>
@@ -41,10 +56,13 @@ export default function LoginForm() {
               type="password"
               name="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="bg-gray-50 border border-gray-300 rounded-sm text-gray-900  focus:ring-blue-500  focus:border-blue-500 block w-full p-1"
               placeholder="Enter your password"
             />
           </div>
+
 
           {/* Remember Section */}
           <div className="flex items-start">
@@ -68,6 +86,7 @@ export default function LoginForm() {
               Forget password?
             </a>
           </div>
+
 
           {/* Submite Button */}
           <button
