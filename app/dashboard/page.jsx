@@ -1,10 +1,12 @@
 import React from "react";
-import { getMovies } from "../libs/server";
+import { getMovies } from "../libs/apis/server";
+import { Card } from "@/components/ui/card";
 
 export default async function DashboardPage() {
   //1.Add shadcn Card
-  const movies = await getMovies();
+  const moviesQuery = await getMovies();
 
+  console.log("MOVIES FE", moviesQuery);
   return (
     <main>
       {/* Navigation bar */}
@@ -17,12 +19,12 @@ export default async function DashboardPage() {
       {/* Body Section */}
       <div className="container mt-8 mb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {movies?.length && 
-        movies.map((movie) => (
-          <div key = {movie.id} className="h-96 bg-green-400">
-            {movie?.id} {movie?.title}
-          </div>
-        ))}
+          {moviesQuery?.length &&
+            moviesQuery.map((movie) => (
+              <div key={movie?._id} className="h-96 bg-green-400">
+                {movie?.id} {movie?.title}
+              </div>
+            ))}
         </div>
       </div>
     </main>
