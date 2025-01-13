@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { loginUser } from "../libs/server";
 
 //Client component for CSR (Client Site Rendering)
 export default function LoginForm({ title }) {
@@ -16,7 +17,7 @@ export default function LoginForm({ title }) {
       return false;
     } else {
       setEmailError("");
-    }
+    } 
     if (!password) {
       setPasswordError("Password is required!");
       return false;
@@ -28,14 +29,15 @@ export default function LoginForm({ title }) {
   };
 
   //Form Submition
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const isValid = validateForm();
 
     if (isValid) {
-      //login Form Submition
-      console.log("Form Data:", { email: email, password: password });
+      //login Form Data Submition
+      const login = await loginUser ({email: email, password: password});
+      console.log("LOGIN RESPONSE", login);
     }
   };
   return (
